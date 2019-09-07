@@ -1,0 +1,10 @@
+.contents
+  = render 'articles/header'
+  .left-content
+    - @articles.each do |article|
+      = render 'articles/article', article: article
+  .right-content
+    .right-content__profile-edit
+      プロフィールを編集する
+    .right-content__profile-detail
+      まだ何もないよー

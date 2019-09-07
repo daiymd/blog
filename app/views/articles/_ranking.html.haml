@@ -1,0 +1,19 @@
+- @view_rank.each.with_index(1) do |rank, i|
+  .ranking
+    .rank
+      = "#{i}位"
+    .article
+      .article__image
+        = image_tag rank.image.url, size: "220x200" if rank.image.present?
+      .article__title
+        = link_to rank.title, "/articles/#{rank.id}", class: "article__title_link"
+        -# リンクの部分はjsでボーダー追加と少し透明にする。
+      .article__latest-text
+        = rank.text
+      .article__user-name
+        = link_to rank.user.name, "/users/#{rank.user.id}", class: "name_link"
+      .article__create-day
+        = rank.created_at.strftime("%Y/%m/%d %H:%M")
+      .article__tags
+        - rank.tag_list.each do |tag|
+          = link_to tag, articles_path(tag_name: tag), class: "tag_link"

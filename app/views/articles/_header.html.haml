@@ -1,0 +1,23 @@
+.header
+  .header__title
+    = link_to "ブログ(仮)", articles_path, class: "form"
+  .header__search
+    = form_with url: articles_path, class: 'display', method: :get, local: true do |f|
+      .search-title
+        = f.text_field :search_title, placeholder: 'タイトルを入力', class: "title-search"
+        = button_tag type: 'submit', class: 'search' do
+          = fa_icon 'search', class: 'icon' 
+          = f.label :search_title, '検索', class: 'icon' 
+  .header-right
+    - unless user_signed_in?
+      .header-right__sign-up{ class: 'post'}
+        = link_to "サインアップ", new_user_registration_path, class: "form"
+      .header-right__sign-in{ class: 'post'}
+        = link_to "サインイン", user_session_path, class: "form"
+    - if user_signed_in?
+      .header-right__my-page{ class: 'post'}
+        = link_to "マイページ", user_path(current_user), class: "form"
+      .header-right__new-article{ class: 'post'}
+        = link_to "投稿", new_article_path, class: "form"
+      .header-right__log-out{ class: "post"}
+        = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "form"

@@ -1,0 +1,18 @@
+.left-article
+  .article
+    .article__image
+      = image_tag article.image.url, size: "220x200" if article.image.present?
+    .article__title
+      = link_to article.title, "/articles/#{article.id}", class: "article__title_link"
+    .article__latest-text
+      - if article.text.length > 20
+        = "#{article.text[0,20]}..."
+      - else
+        = article.text
+    .article__user-name
+      = link_to article.user.name, "/users/#{article.user.id}", class: "name_link"
+    .article__create-day
+      = article.created_at.strftime("%Y/%m/%d %H:%M")
+    .article__tags
+      - article.tag_list.each do |tag|
+        = link_to tag, articles_path(tag_name: tag), class: "tag_link"

@@ -1,0 +1,16 @@
+.contents
+  .header
+    = render 'header'
+  .left-content
+    .left-content__new-arrival
+      新着の記事
+    .left-content__articles
+      - @articles.each do |article|
+        = render 'article', article: article
+  .right-content
+    .right-content__ranking
+      ランキング
+    .right-content__articles-rank
+      = render 'ranking'
+  .paginate
+    = paginate @articles
