@@ -1,5 +1,9 @@
 .left-article
   .article
+    - if user_signed_in? && current_user.id == article.user_id
+      .article-edit
+        = link_to "編集", edit_article_path(article.id), class: "edit"
+        = link_to "削除", "/articles/#{article.id}", method: :delete, class: "delete"
     .article__image
       = image_tag article.image.url, size: "220x200" if article.image.present?
     .article__title

@@ -1,0 +1,21 @@
+.contents
+  = render 'header'
+  .create-article
+    = form_with model: @article, url: "/articles/#{@article.id}", method: :patch, local: true do |f|
+      .new-article__form
+        .new-article__form__title
+          = f.label :title, "タイトル", class: "title-name"
+          = f.text_field :title, class: "title_new", placeholder: "タイトル", value: "#{@article.title}"
+        .new-article__form__text
+          = f.label :text, "テキスト", class: "text-name"
+          = f.text_area :text, class: "text_new", placeholder: "本文", value: "#{@article.text}"
+        .new-article__form__image
+          = f.label :image, "画像", class: "image-name"
+          = f.label :image do
+            = f.file_field :image, class: "hidden",value: "#{@article.image}"
+            = f.label :image, "ファイルを選択", class: "image_new"
+        .new-article__form__tag
+          = f.label :tag_list, "タグ", class: "tag-name"
+          = f.text_field :tag_list, value: @article.tag_list.join(','), class: "tag_new", placeholder: '複数つける場合は,(半角カンマ)で区切ってください', value: "#{@article.tag_list}"
+        .new-article__form__submit
+          = f.submit "編集", class: "form-btn"
