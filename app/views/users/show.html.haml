@@ -4,9 +4,23 @@
     - @articles.each do |article|
       = render 'articles/article', article: article
   .right-content
-    .right-content__profile-edit
-      プロフィールを編集する
-    .right-content__profile-detail
-      まだ何もないよー
+    .right-content__profile{data: {id: @user.id}}
+      - if @user.image.present?
+        .right-content__profile-image
+          = image_tag @user.image.url, size: "100x100"
+      - unless @user.image.present?
+        .right-content__profile-image
+          = image_tag "https://static.mercdn.net/images/member_photo_noimage_thumb.png", size: "100×100"
+      .right-content__profile-name
+        = @user.name
+      - if @user.text.present?
+        .right-content__profile-text
+          = @user.text
+      - unless @user.text.present?
+        .right-content__profile-text
+          よろしくお願いします！！
+      - if user_signed_in? && current_user.id == @user.id
+        .right-content__profile-edit
+          = link_to "編集する", edit_user_path(@user.id)
   .paginate
     = paginate @articles

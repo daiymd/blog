@@ -1,0 +1,18 @@
+.contents
+  = render 'articles/header'
+  .edit-contents
+    = form_with model: @user, url: "/users/#{@user.id}", class: "edit", method: :patch, local: true do |f|
+      .user-edit
+        .user-edit_image
+          = f.label :image, "画像", class: "image-name"
+          = f.label :image do
+            = f.file_field :image, class: "hidden"
+            = f.label :image, "アバターを選択", class: "image_new"
+        .user-edit_name
+          = f.label :name, "名前", class: "title-name"
+          = f.text_field :name, class: "title-new"
+        .user-edit_text
+          = f.label :text, "テキスト", class: "text-name"
+          = f.text_area :text, class: "text_new", placeholder: "自己紹介"
+        .user-edit_submit
+          = f.submit "編集", class: "form-btn"
