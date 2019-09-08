@@ -11,7 +11,6 @@ body {
 .contents {
   min-height: 100%;
   width: 100vw;
-  // overflow: scroll;
   position: relative;
 }
 
@@ -44,32 +43,41 @@ body {
 }
 
 .left-content {
+  @media screen and (max-width: 1250px) {
+    width: 100%;
+  }
   float: left;
-  width: 950px;
+  width: 70%;
   min-height: calc(100vh - 60px);
   padding-top: 60px;
   position: relative;
+  border-right: solid 2px #f5f5f5;
   &__new-arrival {
-    padding: 20px;
-    font-size: 18px;
+    padding: 20px 20px 0 20px;
+    font-size: 25px;
   }
   &__articles {
-    width: 900px;
+    @media screen and (max-width: 1250px) {
+      width: 100%;
+    }
+    padding: 30px;
     height: calc(100vh - 60px);
   }
 }
 
 .right-content {
+  @media screen and (max-width: 1250px) {
+    display: none;
+  }
   float: right;
-  border-left: solid 2px #f5f5f5;
-  width: calc(100vw - 950px);
+  width: 30%;
   min-height: calc(100vh - 60px);
   padding-top: 60px;
   position: relative;
   display: block;
   &__ranking {
     padding: 20px;
-    font-size: 18px;
+    font-size: 25px;
   }
   &__articles-rank {
     display: flex;
@@ -264,5 +272,4 @@ body {
 
 .ranking {
   float: left;
-  // margin: 0 auto;
 }

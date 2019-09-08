@@ -1,6 +1,6 @@
 .header
   .header__title
-    = link_to "ブログ(仮)", articles_path, class: "form"
+    = link_to "ブログ", articles_path, class: "form"
   .header__search
     = form_with url: articles_path, class: 'display', method: :get, local: true do |f|
       .search-title
