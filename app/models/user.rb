@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
         has_many :articles
         has_many :comments
+        mount_uploader :image, ImageUploader
 end
