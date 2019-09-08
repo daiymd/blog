@@ -3,6 +3,10 @@
     .rank
       = "#{i}位"
     .article
+      - if user_signed_in? && current_user.id == rank.user_id
+        .article-edit
+          = link_to "編集", edit_article_path(rank.id), class: "edit"
+          = link_to "削除", "/articles/#{rank.id}", method: :delete, class: "delete"
       .article__image
         = image_tag rank.image.url, size: "220x200" if rank.image.present?
       .article__title
