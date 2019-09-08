@@ -21,7 +21,6 @@ TECH::EXPERTで学んだことを詰め込んだり、+αで自分で便利な�
 - Ruby on Rails
 - JavaScript
 - Haml/SCSS
-<!-- - MySQL -->
 - PostgreSQL
 - Heroke
 
