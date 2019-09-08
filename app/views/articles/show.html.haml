@@ -21,5 +21,3 @@
       %p{ class: "comment-list"} <コメント一覧 >
       - @comments.each do |comment|
         = render "comments", comment: comment
-  .impressionist
-    = @article.impressionist_count
