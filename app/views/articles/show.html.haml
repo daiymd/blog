@@ -10,12 +10,13 @@
     .main-article_text
       = @article.text
   .comment
-    .comment__form
-      = form_with url: article_comments_path(@article.id), method: :post, id: "new-comment", local: true do |f|
-        .comment__form-submit
-          = f.label :comment, "コメント", class: "comment-name"
-          = f.text_field :text, class: "comment-form", placeholder: "コメントする"
-          = f.submit "SENT", class: "comment-submit"
+    - if user_signed_in?
+      .comment__form
+        = form_with url: article_comments_path(@article.id), method: :post, id: "new-comment", local: true do |f|
+          .comment__form-submit
+            = f.label :comment, "コメント", class: "comment-name"
+            = f.text_field :text, class: "comment-form", placeholder: "コメントする"
+            = f.submit "SENT", class: "comment-submit"
     .comment__list
       %p{ class: "comment-list"} <コメント一覧 >
       - @comments.each do |comment|
