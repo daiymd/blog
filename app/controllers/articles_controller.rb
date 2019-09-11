@@ -3,13 +3,13 @@ class ArticlesController < ApplicationController
 
   def index
     if params[:search_title]
-      @articles = Article.where('title LIKE ?', "%#{params[:search_title]}%").page(params[:page]).per(9)
+      @articles = Article.where('title LIKE ?', "%#{params[:search_title]}%").page(params[:page]).per(9).order("created_at DESC")
       respond_to do |format|
         format.html
         format.json
       end
     else
-      @articles = Article.page(params[:page]).per(9)
+      @articles = Article.page(params[:page]).per(9).order("created_at DESC")
     end
     
     if params[:tag_name]
