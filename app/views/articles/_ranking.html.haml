@@ -1,23 +1,32 @@
-- @view_rank.each.with_index(1) do |rank, i|
+- @view_rank.each.with_index(1) do |article, i|
   .ranking
     .rank
       = "#{i}位"
     .article
-      - if user_signed_in? && current_user.id == rank.user_id
+      - if user_signed_in? && current_user.id == article.user_id
         .article-edit
-          = link_to "編集", edit_article_path(rank.id), class: "edit"
-          = link_to "削除", "/articles/#{rank.id}", method: :delete, class: "delete"
-      .article__image
-        = image_tag rank.image.url, size: "220x200" if rank.image.present?
+          = link_to "編集", edit_article_path(article.id), class: "edit"
+          = link_to "削除", "/articles/#{article.id}", method: :delete, class: "delete"
+      -if article.image.present?
+        .article__image
+          = image_tag article.image.url, size: "220x200"
+      -unless article.image.present?
+        .article__image
+          = image_tag "http://design-ec.com/d/e_others_50/l_e_others_501.png", width: "220", height: "200"
       .article__title
-        = link_to rank.title, "/articles/#{rank.id}", class: "article__title_link"
-        -# リンクの部分はjsでボーダー追加と少し透明にする。
+        - if article.title.length > 10
+          = link_to "#{article.title[0,10]}...", "/articles/#{article.id}", class: "article__title_link"
+        -else
+          = link_to article.title, "/articles/#{article.id}", class: "article__title_link"
       .article__latest-text
-        = rank.text
+        - if article.text.length > 20
+          = "#{article.text[0,20]}..."
+        - else
+          = article.text
       .article__user-name
-        = link_to rank.user.name, "/users/#{rank.user.id}", class: "name_link"
+        = link_to article.user.name, "/users/#{article.user.id}", class: "name_link"
       .article__create-day
-        = rank.created_at.strftime("%Y/%m/%d %H:%M")
+        = article.created_at.strftime("%Y/%m/%d %H:%M")
       .article__tags
-        - rank.tag_list.each do |tag|
+        - article.tag_list.each do |tag|
           = link_to tag, articles_path(tag_name: tag), class: "tag_link"

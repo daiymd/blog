@@ -5,8 +5,9 @@
       = @article.title
     .main-article_created
       = @article.created_at.strftime("%Y/%m/%d %H:%M")
-    .main-article_image
-      = image_tag @article.image.url, size: "680x500" if @article.image.present?
+    - if @article.image.present?
+      .main-article_image
+        = image_tag @article.image.url, size: "680x500"
     .main-article_text
       = @article.text
   .comment

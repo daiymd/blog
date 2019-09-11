@@ -5,7 +5,7 @@ class Article < ApplicationRecord
   with_options presence: true do
     validates :title
     validates :text
-    validates :image
+    # validates :image
   end
   
   mount_uploader :image, ImageUploader

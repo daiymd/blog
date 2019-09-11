@@ -4,10 +4,17 @@
       .article-edit
         = link_to "編集", edit_article_path(article.id), class: "edit"
         = link_to "削除", "/articles/#{article.id}", method: :delete, class: "delete"
-    .article__image
-      = image_tag article.image.url, size: "220x200" if article.image.present?
+    -if article.image.present?
+      .article__image
+        = image_tag article.image.url, size: "220x200"
+    -unless article.image.present?
+      .article__image
+        = image_tag "http://design-ec.com/d/e_others_50/l_e_others_501.png", width: "220", height: "200"
     .article__title
-      = link_to article.title, "/articles/#{article.id}", class: "article__title_link"
+      - if article.title.length > 10
+        = link_to "#{article.title[0,10]}...", "/articles/#{article.id}", class: "article__title_link"
+      -else
+        = link_to article.title, "/articles/#{article.id}", class: "article__title_link"
     .article__latest-text
       - if article.text.length > 20
         = "#{article.text[0,20]}..."

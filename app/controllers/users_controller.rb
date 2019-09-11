@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @articles = @user.articles.page(params[:page]).per(9)
-    @article = Article.find(params[:id])
   end
 
   def edit
@@ -11,7 +10,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if current_user = @user
+    if current_user == @user
       @user.update(user_params)
       redirect_to user_path(@user)
     end
