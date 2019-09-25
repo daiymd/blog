@@ -29,7 +29,7 @@ $(function(){
     })
     .fail(function(){
       $('.comment-submit').removeAttr("disabled");
-      alert('error');
+      alert('コメントを入力してください。');
     })
   })
 })
