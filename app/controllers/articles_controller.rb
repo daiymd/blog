@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
     before_action :ranking
+    before_action :move_index, except: [:index, :show]
 
   def index
     if params[:search_title]
@@ -45,6 +46,9 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+    unless @article.user_id == current_user.id && user_signed_in?
+      redirect_to root_path
+    end
   end
 
   def update
@@ -67,5 +71,9 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:text, :image, :title, :tag_list).merge(user_id: current_user.id)
+  end
+
+  def move_index
+    redirect_to root_path unless user_signed_in?
   end
 end
